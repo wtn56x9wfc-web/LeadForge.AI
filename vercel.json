@@ -4,12 +4,5 @@
     "api/generate.js": {
       "runtime": "nodejs20.x"
     }
-  },
-  "routes": [
-    {
-      "src": "/api/gene---rate",
-      "methods": ["POST"],
-      "dest": "/api/generate.js"
-    }
-  ]
+  }
 }
