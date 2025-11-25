@@ -23,11 +23,12 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
     goal,
     tone,
     messageType,
-    extraContext
+    extraContext,
   };
 
   try {
-    const res = await fetch("/api/generate", {
+    // THE FIX → correct URL path
+    const res = await fetch("/api/generate.js", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -41,8 +42,10 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
     output.classList.remove("hidden");
 
   } catch (err) {
-    loader.textContent = "Error generating message.";
-    console.error(err);
+    loader.classList.add("hidden");
+    outputText.textContent = "Error generating message.";
+    output.classList.remove("hidden");
+    console.error("Frontend error:", err);
   }
 });
 
