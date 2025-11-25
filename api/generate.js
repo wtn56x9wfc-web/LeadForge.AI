@@ -12,6 +12,6 @@ Email 2: Hi there! I noticed your interest in ${goal}. At ${business}, we've gui
 Generic social media DM: Hi! Saw you're interested in ${goal}. ${business} can help you make it happen—would you like to hear more?
 Facebook DM: Hello! I'm with ${business}. We assist people like you to ${goal}. Are you open to a brief conversation?
 SMS: Hi! This is ${business}. We help people ${goal}. Interested? Reply and we can talk!
-Video Script: Hi, I'm from ${business}. We help people ${goal}. If you're looking for friendly, professional support, let's connect.`,
+Video Script: Hi, I'm from ${business}. We help people ${goal}. If you're looking for friendly, professional support, let's connect.`;
   return res.status(200).json({ text });
 }
