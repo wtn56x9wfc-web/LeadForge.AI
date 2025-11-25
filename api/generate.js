@@ -21,4 +21,10 @@ module.exports = async function (req, res) {
     });
 
     const json = await apiRes.json();
-    return res.stat
+    return res.status(200).json(json);
+
+  } catch (err) {
+    console.error("API ERROR:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
