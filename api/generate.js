@@ -1,8 +1,10 @@
+const fetch = require("node-fetch");
+
 module.exports = async function (req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
-    }
-  
+  }
+
   try {
     const { prompt } = req.body;
 
@@ -19,10 +21,4 @@ module.exports = async function (req, res) {
     });
 
     const json = await apiRes.json();
-    res.status(200).json(json);
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-  }
-};
+    return res.stat
