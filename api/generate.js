@@ -1,8 +1,8 @@
-export default async function handler(req, res) {
+module.exports = async function (req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
-  }
-
+    }
+  
   try {
     const { prompt } = req.body;
 
@@ -19,10 +19,10 @@ export default async function handler(req, res) {
     });
 
     const json = await apiRes.json();
-    return res.status(200).json(json);
+    res.status(200).json(json);
 
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
   }
-}
+};
