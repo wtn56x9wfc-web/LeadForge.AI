@@ -15,30 +15,34 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
   output.classList.add("hidden");
   loader.classList.remove("hidden");
 
+  // This is what the backend will receive
   const body = {
-    businessName,
-    senderName,
-    recipientName,
-    industry,
-    goal,
-    tone,
-    messageType,
-    extraContext,
+    prompt: {
+      businessName,
+      senderName,
+      recipientName,
+      industry,
+      goal,
+      tone,
+      messageType,
+      extraContext
+    }
   };
 
   try {
-    // THE FIX → correct URL path
-    const res = await fetch("/api/generate.js", {
+    // FIX → correct endpoint
+    const res = await fetch("/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify(body)
     });
 
     const data = await res.json();
 
     loader.classList.add("hidden");
 
-    outputText.textContent = data.output || "No result";
+    // Your API returns { output: "text..." }
+    outputText.textContent = data.output || JSON.stringify(data, null, 2) || "No result";
     output.classList.remove("hidden");
 
   } catch (err) {
