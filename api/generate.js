@@ -19,48 +19,42 @@ export default async function handler(req, res) {
   } = req.body;
 
   const prompt = `
-You are an elite outreach copywriter. Create a message that is:
-- extremely friendly
+Create an outreach message with these rules:
+- friendly, clean, not salesy
+- personalized
 - professional
-- concise
-- not salesy
-- tailored to the user's business and goal
-- written clearly in ${tone} tone
-- optimized for ${industry}
-- personalized for ${recipientName || "the recipient"}
-
-Business: ${businessName}
-Sender Name: ${senderName}
-Recipient Name: ${recipientName || "Not Provided"}
+- short
+Tone: ${tone}
 Industry: ${industry}
 Goal: ${goal}
-Message Type: ${messageType}
-Extra Context: ${extraContext || "None"}
+Business: ${businessName}
+Sender: ${senderName}
+Recipient: ${recipientName || "Not provided"}
+Extra: ${extraContext || "None"}
 
-Return ONLY clean JSON in this format:
+Return ONLY JSON:
 {
-  "output": "final outreach message here"
+  "output": "final message"
 }
   `;
 
   try {
     const completion = await client.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-4.1",
       messages: [
-        { role: "system", content: "You return only JSON." },
+        { role: "system", content: "Return ONLY JSON." },
         { role: "user", content: prompt }
       ],
       response_format: { type: "json_object" }
     });
 
-    // Proper way to extract JSON output
-    const jsonText = completion.choices[0].message.content;
-    const parsed = JSON.parse(jsonText);
+    const raw = completion.choices[0].message.content;
+    const parsed = JSON.parse(raw);
 
     return res.status(200).json(parsed);
 
-  } catch (error) {
-    console.error("GENERATION ERROR:", error);
+  } catch (err) {
+    console.error("GENERATION ERROR:", err);
     return res.status(500).json({ error: "Generation failed" });
   }
 }
