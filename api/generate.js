@@ -44,16 +44,23 @@ Return ONLY clean JSON in this format:
   `;
 
   try {
-    const completion = await client.responses.create({
+    const completion = await client.chat.completions.create({
       model: "gpt-4.1-mini",
-      input: prompt,
+      messages: [
+        { role: "system", content: "You return only JSON." },
+        { role: "user", content: prompt }
+      ],
       response_format: { type: "json_object" }
     });
 
-    const final = completion.output[0].content[0].text;
-    return res.status(200).json(JSON.parse(final));
+    // Proper way to extract JSON output
+    const jsonText = completion.choices[0].message.content;
+    const parsed = JSON.parse(jsonText);
+
+    return res.status(200).json(parsed);
+
   } catch (error) {
-    console.error(error);
+    console.error("GENERATION ERROR:", error);
     return res.status(500).json({ error: "Generation failed" });
   }
 }
