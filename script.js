@@ -15,34 +15,30 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
   output.classList.add("hidden");
   loader.classList.remove("hidden");
 
-  // This is what the backend will receive
+  // SEND RAW FIELDS — NO "prompt:" WRAPPER
   const body = {
-    prompt: {
-      businessName,
-      senderName,
-      recipientName,
-      industry,
-      goal,
-      tone,
-      messageType,
-      extraContext
-    }
+    businessName,
+    senderName,
+    recipientName,
+    industry,
+    goal,
+    tone,
+    messageType,
+    extraContext
   };
 
   try {
-    // FIX → correct endpoint
     const res = await fetch("/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
 
     const data = await res.json();
 
     loader.classList.add("hidden");
 
-    // Your API returns { output: "text..." }
-    outputText.textContent = data.output || JSON.stringify(data, null, 2) || "No result";
+    outputText.textContent = data.output || "No result";
     output.classList.remove("hidden");
 
   } catch (err) {
