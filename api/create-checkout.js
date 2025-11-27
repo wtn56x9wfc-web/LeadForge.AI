@@ -21,9 +21,8 @@ module.exports = async function (req, res) {
     });
 
     return res.status(200).json({ url: session.url });
-
   } catch (err) {
-    console.error("Stripe error:", err);
-    return res.status(500).json({ error: "Stripe checkout failed", detail: err.message });
+    console.error("STRIPE SESSION ERROR:", err);
+    return res.status(500).json({ error: "Stripe error", details: err.message });
   }
 };
