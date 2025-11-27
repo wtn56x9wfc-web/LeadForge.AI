@@ -9,52 +9,41 @@
 
 <body>
 
-  <!-- Top Branding -->
   <header class="header">
-    <div class="header-content">
-      <h1>LeadForge.ai</h1>
-      <p>Your AI-powered outreach assistant.</p>
-    </div>
+    <h1>LeadForge.ai</h1>
+    <p>Precision outreach. Powered by AI.</p>
   </header>
 
-  <!-- Main Container -->
   <main class="main-container">
 
     <div class="card">
-
       <h2 class="card-title">Outreach Generator</h2>
 
-      <!-- Business Name -->
       <div class="form-group">
         <label>Business Name</label>
         <input id="businessName" type="text" placeholder="Acme Roofing Co." />
       </div>
 
-      <!-- Sender -->
       <div class="form-group">
         <label>Your Name</label>
         <input id="senderName" type="text" placeholder="Alex Thompson" />
       </div>
 
-      <!-- Recipient -->
       <div class="form-group">
         <label>Recipient Name (optional)</label>
-        <input id="recipientName" type="text" placeholder="John, Sarah, etc." />
+        <input id="recipientName" type="text" placeholder="John, Sarah..." />
       </div>
 
-      <!-- Industry -->
       <div class="form-group">
         <label>Industry</label>
-        <input id="industry" type="text" placeholder="Fitness, real estate, SaaS..." />
+        <input id="industry" type="text" placeholder="Real estate, fitness, SaaS..." />
       </div>
 
-      <!-- Goal -->
       <div class="form-group">
         <label>Goal</label>
         <textarea id="goal" placeholder="What do you want to accomplish?"></textarea>
       </div>
 
-      <!-- Tone -->
       <div class="form-group">
         <label>Tone</label>
         <select id="tone">
@@ -65,27 +54,47 @@
         </select>
       </div>
 
-      <!-- Message Type -->
       <div class="form-group">
         <label>Message Type</label>
         <select id="messageType">
-          <option value="cold email">Cold Email</option>
-          <option value="short email">Short Email</option>
-          <option value="linkedin dm">LinkedIn DM</option>
-          <option value="instagram dm">Instagram DM</option>
-          <option value="facebook messenger">Facebook Messenger</option>
-          <option value="sms">SMS</option>
-          <option value="follow-up">Follow-Up Message</option>
+          <option value="cold_email_short">Cold Email (Short)</option>
+          <option value="cold_email_long">Cold Email (Long)</option>
+          <option value="linkedin_dm">LinkedIn DM</option>
+          <option value="instagram_dm">Instagram DM</option>
+          <option value="facebook_dm">Facebook Messenger</option>
+          <option value="sms_pitch">SMS Pitch</option>
+          <option value="follow_up">Follow-Up Message</option>
           <option value="apology">Apology Message</option>
-          <option value="pitch">Sales Pitch</option>
+          <option value="testimonial">Testimonial Request</option>
+          <option value="sales_pitch">Sales Pitch</option>
         </select>
       </div>
 
-      <!-- Extra -->
       <div class="form-group">
         <label>Extra Context (optional)</label>
-        <textarea id="extraContext" placeholder="Any extra details…"></textarea>
+        <textarea id="extraContext" placeholder="Any extra details..."></textarea>
       </div>
 
-      <!-- Button -->
-      <button id="generateBtn" class="generate-btn">Generate Message</button
+      <button id="generateBtn" class="generate-btn">Generate Message</button>
+
+      <div id="loader" class="loader hidden">
+        <div class="spinner"></div>
+        Generating your outreach…
+      </div>
+
+      <div id="outputSection" class="output-section hidden">
+        <h3>Your Message</h3>
+        <pre id="outputText"></pre>
+        <button id="copyBtn" class="copy-btn">Copy to Clipboard</button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>LeadForge.ai — AI Outreach That Actually Works.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
