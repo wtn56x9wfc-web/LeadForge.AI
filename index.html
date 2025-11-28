@@ -12,11 +12,28 @@
     <div class="card">
       <h1>LeadForge<span>.ai</span></h1>
 
-      <input id="businessName" placeholder="Business Name" />
-      <input id="senderName" placeholder="Your Name" />
-      <input id="recipientName" placeholder="Recipient Name" />
-      <input id="industry" placeholder="Industry" />
-      <textarea id="goals" placeholder="Business Goals"></textarea>
+      <label class="label" for="businessName">Business Name</label>
+      <input id="businessName" placeholder="Acme Roofing" />
+
+      <label class="label" for="senderName">Your Name</label>
+      <input id="senderName" placeholder="John Smith" />
+
+      <label class="label" for="recipientName">Recipient Name</label>
+      <input id="recipientName" placeholder="Sara Patel" />
+
+      <label class="label" for="industry">Industry</label>
+      <input id="industry" placeholder="Roofing / Home Services" />
+
+      <label class="label" for="messageType">Message Type</label>
+      <select id="messageType">
+        <option value="Cold Email" selected>Cold Email</option>
+        <option value="Follow-Up">Follow-Up</option>
+        <option value="LinkedIn DM">LinkedIn DM</option>
+        <option value="SMS">SMS</option>
+      </select>
+
+      <label class="label" for="goals">Business Goals</label>
+      <textarea id="goals" placeholder="Book roof inspections, upsell maintenance plans, target neighborhoods hit by recent storms."></textarea>
 
       <button id="generateBtn">Generate Outreach</button>
 
