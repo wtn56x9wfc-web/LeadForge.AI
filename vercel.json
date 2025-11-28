@@ -1,14 +1,8 @@
 {
-  "version": 2,
+  "version": 3,
   "functions": {
     "api/generate.js": {
       "runtime": "nodejs20.x"
     }
-  },
-  "routes": [
-    {
-      "src": "/api/generate",
-      "dest": "/api/generate.js"
-    }
-  ]
+  }
 }
