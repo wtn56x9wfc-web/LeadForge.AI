@@ -1,61 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LeadForge.ai</title>
-
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">LeadForge<span>.ai</span></div>
-    <div class="tagline">Outreach built for closers.</div>
-  </header>
+  <h1>LeadForge.ai</h1>
+  <p>Outreach built for closers.</p>
 
-  <main>
-    <div class="card">
+  <div class="container">
+    <h2>Generate Outreach</h2>
 
-      <h2>Generate Outreach</h2>
+    <label>Business Name</label>
+    <input id="businessName">
 
-      <label>Business Name</label>
-      <input type="text" id="businessName" placeholder="Acme Roofing" />
+    <label>Your Name</label>
+    <input id="senderName">
 
-      <label>Your Name</label>
-      <input type="text" id="senderName" placeholder="John Smith" />
+    <label>Recipient Name</label>
+    <input id="recipientName">
 
-      <label>Recipient Name</label>
-      <input type="text" id="recipientName" placeholder="Sara Patel" />
+    <label>Industry</label>
+    <select id="industry">
+      <option>Roofing / Home Service</option>
+      <option>Real Estate</option>
+      <option>Software</option>
+      <option>Coaching</option>
+    </select>
 
-      <label>Industry</label>
-      <input type="text" id="industry" placeholder="Roofing / Home Services" />
+    <label>Message Type</label>
+    <select id="messageType">
+      <option>Cold Email</option>
+      <option>Follow Up</option>
+      <option>LinkedIn DM</option>
+      <option>SMS</option>
+    </select>
 
-      <label>Message Type</label>
-      <select id="messageType">
-        <option value="cold-email">Cold Email</option>
-        <option value="warm-email">Warm Email</option>
-        <option value="follow-up">Follow-Up</option>
-        <option value="sms">SMS</option>
-        <option value="linkedin">LinkedIn Message</option>
-      </select>
+    <label>Business Goals</label>
+    <input id="goals">
 
-      <label>Business Goals</label>
-      <textarea id="goals" placeholder="Book inspections, upsell plans, etc."></textarea>
+    <label>Additional Info</label>
+    <textarea id="extra"></textarea>
 
-      <label>Additional Info</label>
-      <textarea id="extraInfo" placeholder="Optional details that help the AI craft a sharper message."></textarea>
+    <button id="generateBtn">Generate Outreach</button>
 
-      <button id="generateBtn">Generate Outreach</button>
+    <div id="output" style="margin-top:20px; white-space:pre-wrap;"></div>
+  </div>
 
-    </div>
-  </main>
-
-  <footer>
-    © 2024 LeadForge.ai — All Rights Reserved
-  </footer>
+  <p class="footer">© 2024 LeadForge.ai — All Rights Reserved</p>
 
   <script src="/script.js"></script>
+
 </body>
 </html>
