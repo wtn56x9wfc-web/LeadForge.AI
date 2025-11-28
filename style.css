@@ -1,36 +1,90 @@
+/* Background */
 body {
-  font-family: Arial, sans-serif;
-  background: #f8f8f8;
-  padding: 40px;
+  margin: 0;
+  padding: 0;
+  background: #0d0d0d;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  color: white;
 }
 
-.container {
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
+/* Center wrapper */
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Card */
+.card {
+  width: 420px;
+  background: #1a1a1a;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: rgba(255, 255, 255, 0.08) 0px 4px 12px;
+}
+
+/* Title */
+.card h1 {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.card h1 span {
+  color: #0d6efd;
+}
+
+/* Inputs */
 input, textarea {
   width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: white;
+  font-size: 15px;
+  box-sizing: border-box;
 }
 
+textarea {
+  height: 100px;
+  resize: none;
+}
+
+/* Button */
 button {
   width: 100%;
-  padding: 12px;
-  background: black;
+  padding: 14px;
+  margin-top: 10px;
+  background: #0d6efd;
   color: white;
   border: none;
-  cursor: pointer;
+  border-radius: 8px;
   font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
+button:hover {
+  background: #0a58ca;
+}
+
+/* Output box */
 #output {
-  margin-top: 20px;
-  padding: 10px;
-  background: #eee;
+  margin-top: 22px;
+  background: #121212;
+  border: 1px solid #333;
+  padding: 16px;
+  border-radius: 8px;
   white-space: pre-wrap;
+  min-height: 50px;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  line-height: 1.45;
 }
