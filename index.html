@@ -9,52 +9,50 @@
 
 <body>
 
-  <!-- Header -->
   <header>
     <div class="logo">LeadForge<span>.ai</span></div>
-    <p class="tagline">AI-powered outreach that actually gets replies.</p>
+    <div class="tagline">Outreach built for closers.</div>
   </header>
 
-  <main class="wrapper">
+  <main>
     <div class="card">
 
-      <h2 class="section-title">Generate Outreach</h2>
+      <h2>Generate Outreach</h2>
 
-      <label class="label" for="businessName">Business Name</label>
-      <input id="businessName" />
+      <label>Business Name</label>
+      <input type="text" id="businessName" placeholder="Acme Roofing" />
 
-      <label class="label" for="senderName">Your Name</label>
-      <input id="senderName" />
+      <label>Your Name</label>
+      <input type="text" id="senderName" placeholder="John Smith" />
 
-      <label class="label" for="recipientName">Recipient Name</label>
-      <input id="recipientName" />
+      <label>Recipient Name</label>
+      <input type="text" id="recipientName" placeholder="Sara Patel" />
 
-      <label class="label" for="industry">Industry</label>
-      <input id="industry" />
+      <label>Industry</label>
+      <input type="text" id="industry" placeholder="Roofing / Home Services" />
 
-      <label class="label" for="messageType">Message Type</label>
+      <label>Message Type</label>
       <select id="messageType">
-        <option value="Cold Email">Cold Email</option>
-        <option value="Follow-Up Email">Follow-Up Email</option>
-        <option value="LinkedIn Outreach">LinkedIn Outreach</option>
-        <option value="SMS Outreach">SMS Outreach</option>
+        <option value="cold-email">Cold Email</option>
+        <option value="warm-email">Warm Email</option>
+        <option value="follow-up">Follow-Up</option>
+        <option value="sms">SMS</option>
+        <option value="linkedin">LinkedIn Message</option>
       </select>
 
-      <label class="label" for="goals">Business Goals</label>
-      <textarea id="goals"></textarea>
+      <label>Business Goals</label>
+      <textarea id="goals" placeholder="Book inspections, upsell plans, etc."></textarea>
 
-      <label class="label" for="extra">Additional Info</label>
-      <textarea id="extra" placeholder="Optional details that help the AI craft a sharper message."></textarea>
+      <label>Additional Info</label>
+      <textarea id="extraInfo" placeholder="Optional details that help the AI craft a sharper message."></textarea>
 
       <button id="generateBtn">Generate Outreach</button>
-
-      <div id="output" class="hidden"></div>
 
     </div>
   </main>
 
   <footer>
-    <p>© 2024 LeadForge.ai — All Rights Reserved</p>
+    © 2024 LeadForge.ai — All Rights Reserved
   </footer>
 
   <script src="script.js"></script>
