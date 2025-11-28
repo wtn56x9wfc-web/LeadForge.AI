@@ -27,7 +27,14 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
     });
 
     const data = await res.json();
+
+    if (data.error) {
+      output.textContent = "Server error: " + data.error;
+      return;
+    }
+
     output.textContent = data.message || "Error generating outreach.";
+
   } catch (err) {
     output.textContent = "Network error.";
   }
