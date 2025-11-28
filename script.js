@@ -1,22 +1,24 @@
 document.getElementById("generateBtn").addEventListener("click", async () => {
-
-  // Create output box if it doesn't exist
+  // Try to get existing output box
   let output = document.getElementById("output");
+
+  // If missing, create it cleanly
   if (!output) {
     output = document.createElement("div");
     output.id = "output";
-    output.style.marginTop = "22px";
-    output.style.background = "#101010";
+    output.style.marginTop = "24px";
+    output.style.background = "#111";
     output.style.border = "1px solid #333";
-    output.style.padding = "18px";
+    output.style.padding = "20px";
     output.style.borderRadius = "12px";
     output.style.whiteSpace = "pre-wrap";
     output.style.fontSize = "15px";
     output.style.lineHeight = "1.55";
+
     document.querySelector(".card").appendChild(output);
   }
 
-  output.style.display = "block";
+  // Show loading state
   output.textContent = "Generating...";
 
   const payload = {
@@ -25,7 +27,7 @@ document.getElementById("generateBtn").addEventListener("click", async () => {
     recipientName: document.getElementById("recipientName").value.trim(),
     industry: document.getElementById("industry").value.trim(),
     goals: document.getElementById("goals").value.trim(),
-    extra: document.getElementById("extraInfo").value.trim(),   // FIXED
+    extra: document.getElementById("extraInfo").value.trim(),
     messageType: document.getElementById("messageType").value
   };
 
