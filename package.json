@@ -1,0 +1,7 @@
+{
+  "name": "leadforge",
+  "version": "1.0.0",
+  "dependencies": {
+    "openai": "4.73.0"
+  }
+}
