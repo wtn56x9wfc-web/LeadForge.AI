@@ -1,8 +1,7 @@
 {
-  "version": 2,
-  "functions": {
-    "api/generate.js": {
-      "runtime": "nodejs18.x"
-    }
+  "name": "leadforge",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "vercel dev"
   }
 }
