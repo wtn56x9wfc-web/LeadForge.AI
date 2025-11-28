@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LeadForge.ai</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <header>
-    <div class="logo">LeadForge.<span>ai</span></div>
+    <div class="logo">LeadForge<span>.ai</span></div>
     <div class="tagline">Outreach built for closers.</div>
   </header>
 
@@ -19,23 +20,33 @@
       <h2>Generate Outreach</h2>
 
       <label>Business Name</label>
-      <input id="businessName" placeholder="Acme Roofing">
+      <input type="text" id="businessName" placeholder="Acme Roofing" />
 
       <label>Your Name</label>
-      <input id="senderName" placeholder="John Smith">
+      <input type="text" id="senderName" placeholder="John Smith" />
 
       <label>Recipient Name</label>
-      <input id="recipientName" placeholder="Sara Patel">
+      <input type="text" id="recipientName" placeholder="Sara Patel" />
 
       <label>Industry</label>
-      <input id="industry" placeholder="Roofing / Home Services">
+      <input type="text" id="industry" placeholder="Roofing / Home Services" />
 
       <label>Message Type</label>
       <select id="messageType">
-        <option value="Cold Email">Cold Email</option>
-        <option value="Warm Follow-up">Warm Follow-up</option>
-        <option value="Professional DM">Professional DM</option>
-        <option value="Sales Outreach">Sales Outreach</option>
+
+        <option value="cold-email">Cold Email</option>
+        <option value="warm-intro">Warm Introduction</option>
+        <option value="follow-up">Follow-Up Email</option>
+        <option value="re-engage">Re-Engagement Email</option>
+        <option value="sales-pitch">Sales Pitch</option>
+        <option value="discovery-call">Discovery Call Request</option>
+        <option value="proposal">Proposal Delivery</option>
+        <option value="contract-followup">Contract Follow-Up</option>
+        <option value="sms">SMS Outreach</option>
+        <option value="linkedin-connect">LinkedIn Connection Request</option>
+        <option value="linkedin-pitch">LinkedIn Pitch</option>
+        <option value="thank-you">Thank-You Message</option>
+
       </select>
 
       <label>Business Goals</label>
@@ -56,6 +67,6 @@
   </footer>
 
   <script src="script.js"></script>
-
 </body>
 </html>
+
