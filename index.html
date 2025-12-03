@@ -3,70 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LeadForge.ai</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>GridForge.ai — Forge Outreach. Close More Deals.</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">LeadForge<span>.ai</span></div>
-    <div class="tagline">Outreach built for closers.</div>
-  </header>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">GridForge<span>.ai</span></div>
 
-  <main>
-    <div class="card">
-
-      <h2>Generate Outreach</h2>
-
-      <label>Business Name</label>
-      <input type="text" id="businessName" placeholder="Acme Roofing" />
-
-      <label>Your Name</label>
-      <input type="text" id="senderName" placeholder="John Smith" />
-
-      <label>Recipient Name</label>
-      <input type="text" id="recipientName" placeholder="Sara Patel" />
-
-      <label>Industry</label>
-      <input type="text" id="industry" placeholder="Roofing / Home Services" />
-
-      <label>Message Type</label>
-      <select id="messageType">
-
-        <option value="cold-email">Cold Email</option>
-        <option value="warm-intro">Warm Introduction</option>
-        <option value="follow-up">Follow-Up Email</option>
-        <option value="re-engage">Re-Engagement Email</option>
-        <option value="sales-pitch">Sales Pitch</option>
-        <option value="discovery-call">Discovery Call Request</option>
-        <option value="proposal">Proposal Delivery</option>
-        <option value="contract-followup">Contract Follow-Up</option>
-        <option value="sms">SMS Outreach</option>
-        <option value="linkedin-connect">LinkedIn Connection Request</option>
-        <option value="linkedin-pitch">LinkedIn Pitch</option>
-        <option value="thank-you">Thank-You Message</option>
-
-      </select>
-
-      <label>Business Goals</label>
-      <textarea id="goals" placeholder="Book inspections, upsell plans, generate leads..."></textarea>
-
-      <label>Additional Info</label>
-      <textarea id="extra" placeholder="Anything extra..."></textarea>
-
-      <button id="generateBtn">Generate Outreach</button>
-
-      <div id="output" class="hidden"></div>
-
+    <div class="nav-links">
+      <a href="process.html">Process</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="faq.html">FAQ</a>
+      <a href="app/app.html" class="nav-cta">Launch App</a>
     </div>
-  </main>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Forge Outreach. Close More Deals.</h1>
+    <p>
+      Build outreach that cuts through the noise. GridForge generates
+      human-sounding, conversion-focused messages engineered to book
+      more meetings and drive more pipeline.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="app/app.html" class="btn-primary">Launch App</a>
+      <a href="process.html" class="btn-secondary">See Our Process</a>
+    </div>
+  </section>
+
+  <!-- VALUE -->
+  <section class="value">
+    <h2>The Outreach Advantage</h2>
+    <p>
+      Every message is crafted to open conversations, not get ignored.
+      Cold email, LinkedIn, SMS, follow-ups — all forged to convert.
+    </p>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="feature-box">
+      <h3>AI-Powered Messaging</h3>
+      <p>Generate polished, natural outreach in seconds.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Multi-Channel Ready</h3>
+      <p>Email, LinkedIn, SMS, follow-ups — instantly built for you.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Closer-Focused</h3>
+      <p>Every message is engineered to increase replies and bookings.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Start forging outreach that gets results.</h2>
+    <a href="app/app.html" class="btn-primary">Open GridForge</a>
+  </section>
 
   <footer>
-    © 2024 LeadForge.ai — All Rights Reserved
+    © 2025 GridForge.ai — All Rights Reserved
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
-
