@@ -13,12 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!businessName || !senderName || !recipientName || !industry) {
       output.classList.remove("hidden");
-      output.innerHTML = "Please fill out all required fields.";
+      output.value = "Please fill out all required fields.";
       return;
     }
 
     output.classList.remove("hidden");
-    output.innerHTML = "Generating…";
+    output.value = "Generating...";
 
     try {
       const res = await fetch("/api/generate", {
@@ -38,13 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
 
       if (data.error) {
-        output.innerHTML = "Error: " + data.error;
+        output.value = "Error: " + data.error;
         return;
       }
 
-      output.innerHTML = data.message.replace(/\n/g, "<br>");
+      output.value = data.message;
     } catch (err) {
-      output.innerHTML = "Request failed: " + err.message;
+      output.value = "Request failed: " + err.message;
     }
   });
 });
