@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GridForge App</title>
-  <meta name="description" content="Compose and refine professional outreach." />
+  <meta name="description" content="Compose and refine professional outreach. Bulk generation from CSV included." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -21,11 +22,13 @@
 
   <header class="hero" style="padding:80px 20px 32px;">
     <h1>Compose with clarity and control</h1>
-    <p>Provide the essentials—business, recipient, objective—and generate a concise, professional draft.</p>
+    <p>Provide the essentials—business, recipient, objective—and generate a concise, professional draft. Or upload a CSV to generate at scale.</p>
   </header>
 
   <main class="container section" style="padding-top:20px;">
+    <!-- Single-message composer (unchanged) -->
     <div class="card">
+      <h2 style="margin-bottom:10px;">Single Draft</h2>
       <form id="composer" onsubmit="return false;">
         <label>Business name
           <input id="businessName" type="text" placeholder="Acme Robotics" required />
@@ -54,17 +57,62 @@
           <textarea id="extra" placeholder="Relevant details, timing, references, constraints"></textarea>
         </label>
 
-        <div class="hero-buttons" style="margin-top:6px;">
-          <button class="btn-primary" id="generateBtn">Generate</button>
-          <button class="btn-secondary" id="clearBtn" type="button">Clear</button>
-        </div>
-      </form>
+```
+    <div class="hero-buttons" style="margin-top:6px;">
+      <button class="btn-primary" id="generateBtn">Generate</button>
+      <button class="btn-secondary" id="clearBtn" type="button">Clear</button>
     </div>
+  </form>
+</div>
 
-    <div class="card" style="margin-top:22px;">
-      <h3 style="margin-bottom:10px;">Draft</h3>
-      <textarea id="output" placeholder="Your draft will appear here…" readonly></textarea>
-    </div>
+<!-- Bulk generator -->
+<div class="card" style="margin-top:22px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+    <h2 style="margin:0;">Bulk Generator</h2>
+    <div class="badge">Headers: name, company, title, email, notes, industry, goals, messageType</div>
+  </div>
+  <p style="color:var(--text-muted);margin-top:8px;">Upload a CSV with the headers above. We’ll generate one message per row.</p>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin:14px 0;">
+    <input id="csvFile" type="file" accept=".csv" />
+    <button class="btn-secondary" id="downloadTemplateBtn" type="button">Download CSV Template</button>
+    <button class="btn-primary" id="generateBulkBtn" type="button" disabled>Generate All</button>
+  </div>
+
+  <div id="csvPreviewWrap" class="table-wrap" style="display:none;margin-top:10px;">
+    <table id="csvPreview">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="bulkStatus" style="margin-top:12px;color:var(--text-muted);"></div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;">
+    <button class="btn-secondary" id="downloadResultsBtn" type="button" disabled>Download Results CSV</button>
+    <button class="btn-secondary" id="clearBulkBtn" type="button" disabled>Clear Bulk</button>
+  </div>
+</div>
+
+<!-- Bulk results (optional text area) -->
+<div class="card" style="margin-top:22px;">
+  <h3 style="margin-bottom:10px;">Bulk Results</h3>
+  <div id="bulkCount" style="color:var(--text-muted);margin-bottom:8px;">No results yet.</div>
+  <div id="bulkTableWrap" class="table-wrap" style="display:none;">
+    <table id="bulkTable">
+      <thead><tr><th>#</th><th>Name</th><th>Company</th><th>Email</th><th>Message</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Single draft output -->
+<div class="card" style="margin-top:22px;">
+  <h3 style="margin-bottom:10px;">Draft</h3>
+  <textarea id="output" placeholder="Your draft will appear here…" readonly></textarea>
+</div>
+```
+
   </main>
 
   <footer>
@@ -72,41 +120,10 @@
   </footer>
 
   <script src="script.js"></script>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const $ = id => document.getElementById(id);
-
-    $('generateBtn').addEventListener('click', async () => {
-      const payload = {
-        businessName: $('businessName').value.trim(),
-        senderName: $('senderName').value.trim(),
-        recipientName: $('recipientName').value.trim(),
-        industry: $('industry').value.trim(),
-        goals: $('goals').value.trim(),
-        messageType: $('messageType').value,
-        extra: $('extra').value.trim()
-      };
-      if (!payload.businessName || !payload.senderName || !payload.recipientName) return;
-
-      $('output').value = 'Generating…';
-      try {
-        const res = await fetch('/api/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        $('output').value = data.message || 'No content returned.';
-      } catch {
-        $('output').value = 'Error generating content. Please try again.';
-      }
-    });
-
-    $('clearBtn').addEventListener('click', () => {
-      ['businessName','senderName','recipientName','industry','goals','extra'].forEach(id => $(id).value='');
-      $('messageType').value = 'email';
-      $('output').value = '';
-    });
   </script>
+
 </body>
 </html>
