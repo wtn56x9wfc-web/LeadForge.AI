@@ -1,90 +1,62 @@
+<!-- process.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GridForge.ai — Our Process</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>How GridForge Works</title>
+  <meta name="description" content="Understand the GridForge workflow for AI-assisted outreach." />
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
-  <!-- NAVBAR -->
   <nav class="navbar">
-    <div class="nav-logo">GridForge<span>.ai</span></div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="process.html">Process</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-      <a class="nav-cta" href="app.html">Open GridForge</a>
+    <div class="container inner">
+      <div class="nav-logo">Grid<strong><span>Forge</span></strong></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="faq.html">FAQ</a>
+        <a href="app.html" class="nav-cta">Open GridForge</a>
+      </div>
     </div>
   </nav>
 
-  <!-- HEADER -->
-  <section class="hero" style="padding-top:100px;">
-    <h1>Our Process</h1>
-    <p style="max-width:700px;margin:auto;">
-      How GridForge turns raw attention into booked meetings and closed revenue —
-      fast, predictable, and without the usual marketing bullshit.
+  <header class="hero" style="padding:80px 20px 20px;">
+    <h1>Built for clarity. Optimized for results.</h1>
+    <p>
+      Define the objective, add context, generate a draft. GridForge favors the same principles you see from high-caliber AI teams:
+      tight feedback loops, human review, and precise language.
     </p>
-  </section>
+  </header>
 
-  <!-- PROCESS STEPS -->
-  <section class="features" style="max-width:900px;">
-
-    <div class="feature-box" style="width:100%;">
-      <h3>1. Outcome & Targeting Setup</h3>
-      <p>
-        We define the exact outcome you want (calls, demos, replies) and map your ideal
-        prospects so the system isn’t throwing darts — it’s hitting targets.
-      </p>
+  <main class="container" style="margin:40px auto 100px;">
+    <div class="features">
+      <div class="feature-box">
+        <h3>1) Provide inputs</h3>
+        <p>Business, recipient, objective, and constraints. Clarity over volume.</p>
+      </div>
+      <div class="feature-box">
+        <h3>2) Draft generation</h3>
+        <p>Concise, professional messaging tuned to intent and industry context.</p>
+      </div>
+      <div class="feature-box">
+        <h3>3) Review & send</h3>
+        <p>Edit in seconds, then ship. Keep what works, iterate what doesn’t.</p>
+      </div>
     </div>
 
-    <div class="feature-box" style="width:100%;">
-      <h3>2. Message Engineering</h3>
-      <p>
-        GridForge builds cold emails, follow-ups, SMS, LinkedIn messages, and multi-touch
-        flows — all human, all conversion-focused, zero corporate jargon.
-      </p>
-    </div>
+    <section class="cta">
+      <div class="container">
+        <p style="max-width:760px;margin:0 auto 22px;color:var(--text-muted);">
+          Practices are influenced by teams like OpenAI, DeepMind, and Anthropic—short paragraphs, plain language, clear asks.
+        </p>
+        <a class="btn-secondary" href="app.html">Open GridForge</a>
+      </div>
+    </section>
+  </main>
 
-    <div class="feature-box" style="width:100%;">
-      <h3>3. Multi-Channel Delivery</h3>
-      <p>
-        Your outreach is tailored for every platform automatically. Email. LinkedIn.
-        SMS. All consistent. All sharp. All designed to actually land.
-      </p>
-    </div>
-
-    <div class="feature-box" style="width:100%;">
-      <h3>4. Qualification & Filtering</h3>
-      <p>
-        GridForge prevents time-wasters from hitting your calendar. Answer filtering,
-        scoring rules, friction-free routing — all baked in.
-      </p>
-    </div>
-
-    <div class="feature-box" style="width:100%;">
-      <h3>5. Iteration & Optimization</h3>
-      <p>
-        You get proven scripts that get better with every send. Testing, refinement,
-        and constant tuning until the pipeline becomes a machine.
-      </p>
-    </div>
-
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <h2>Ready to start forging better outreach?</h2>
-    <a class="btn-primary" href="app.html">Open GridForge</a>
-  </section>
-
-  <!-- FOOTER -->
   <footer>
-    © 2025 GridForge.ai — All Rights Reserved
+    <div class="container">© <span id="year"></span> GridForge.</div>
   </footer>
-
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
