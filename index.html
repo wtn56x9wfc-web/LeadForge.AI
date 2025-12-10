@@ -1,15 +1,14 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GridForge — AI-Assisted Outreach for Operators</title>
-  <meta name="description" content="GridForge streamlines AI-assisted prospecting and messaging with a clean, enterprise-grade UX." />
+  <title>GridForge — AI-Assisted Outreach</title>
+  <meta name="description" content="Concise, professional outreach powered by a clean, enterprise-grade UX." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- NAVBAR -->
+  <!-- NAV -->
   <nav class="navbar">
     <div class="container inner">
       <div class="nav-logo">Grid<strong><span>Forge</span></strong></div>
@@ -17,18 +16,17 @@
         <a href="index.html">Home</a>
         <a href="process.html">How it Works</a>
         <a href="faq.html">FAQ</a>
-        <a href="app.html" class="nav-cta">Open GridForge</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (only place with Open GridForge) -->
   <header class="hero">
     <h1>AI-assisted outreach that respects attention</h1>
     <p>
-      GridForge helps teams contact the right people with the right message—fast.
-      The product philosophy mirrors leaders in AI and data—OpenAI, DeepMind, Anthropic, NVIDIA, Snowflake:
-      clear surfaces, strong defaults, and measurable outcomes.
+      Reach the right people with messages that read like a pro wrote them—confident, concise, and relevant.
+      The language and UX follow the same modern standards used by leading AI product teams: clear structure, strong defaults,
+      and measurable outcomes.
     </p>
     <div class="hero-buttons">
       <a class="btn-primary" href="app.html">Open GridForge</a>
@@ -37,49 +35,37 @@
   </header>
 
   <!-- VALUE -->
-  <section class="value section">
+  <section class="section">
     <div class="container">
       <h2>What you get</h2>
-      <p style="max-width:760px;margin:10px auto 0;color:var(--text-muted);">
-        Precision messaging, faster iteration, and a UI that stays out of your way.
-        Messages are confident and concise—built for operators who value signal over noise.
+      <p style="max-width:760px;margin-top:8px;color:var(--text-muted);">
+        Precision messaging and a streamlined workflow. Signal over noise, built for operators who care about outcomes.
       </p>
     </div>
   </section>
 
   <!-- FEATURES -->
-  <section class="features container">
-    <div class="feature-box">
-      <h3>Concise, on-brand copy</h3>
-      <p>Drafts read like a professional wrote them—relevant, courteous, and free of filler, tuned to industry context.</p>
-    </div>
-
-    <div class="feature-box">
-      <h3>Simple pipeline</h3>
-      <p>Upload leads, set an objective, generate. Clean workflow, control where it matters.</p>
-    </div>
-
-    <div class="feature-box">
-      <h3>Infrastructure-ready</h3>
-      <p>Front end designed for clarity (think Snowflake-style ergonomics) and backends that scale on modern GPU stacks.</p>
-    </div>
-  </section>
-
-  <!-- CTA (no duplicate primary button on homepage) -->
-  <section class="cta">
-    <div class="container">
-      <h2>Outreach built for outcomes</h2>
-      <p>Start with a focused workflow and scale as you grow. Leverage AI without losing judgment.</p>
-      <a class="btn-secondary" href="faq.html">Read the FAQ</a>
+  <section class="container">
+    <div class="features">
+      <div class="feature-box">
+        <h3>Concise, on-brand copy</h3>
+        <p>Professional tone without the fluff. Context-aware and ready to send.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Simple pipeline</h3>
+        <p>Provide inputs, generate a draft, review, ship. Clean surfaces and fast iteration.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Built to scale</h3>
+        <p>Frontend clarity that pairs with modern data and GPU stacks when you need to grow.</p>
+      </div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="container">© <span id="year"></span> GridForge.</div>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
