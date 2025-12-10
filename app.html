@@ -1,71 +1,120 @@
+<!-- app.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GridForge App</title>
+  <meta name="description" content="Compose and refine AI-assisted outreach messages in GridForge." />
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
   <nav class="navbar">
-    <div class="nav-logo">GridForge<span>.ai</span></div>
-    <div class="nav-links">
-      <a class="nav-cta" href="index.html">Back Home</a>
+    <div class="container inner">
+      <div class="nav-logo">Grid<strong><span>Forge</span></strong></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="process.html">How it Works</a>
+        <a href="faq.html">FAQ</a>
+      </div>
     </div>
   </nav>
 
-  <section class="value" style="padding-top: 40px;">
-    <h2>Generate Outreach</h2>
+  <header class="hero" style="padding:80px 20px 40px;">
+    <h1>Compose with clarity and control</h1>
+    <p>
+      Provide the essentials—business, recipient, objective—and GridForge drafts a concise, professional note.
+      Tone follows enterprise writing standards used by leading AI teams: precise, courteous, and actionable.
+    </p>
+  </header>
 
-    <div class="card" style="max-width: 600px; margin: 40px auto; background:#111; padding:30px; border-radius:10px; border:1px solid #1f1f1f;">
+  <main class="container card" style="margin-bottom:60px;">
+    <form id="composer" onsubmit="return false;">
+      <label>Business name
+        <input id="businessName" type="text" placeholder="Acme Robotics" required />
+      </label>
 
-      <label>Business Name</label>
-      <input type="text" id="businessName" placeholder="Acme Roofing" />
+      <label>Sender name
+        <input id="senderName" type="text" placeholder="Alex Chen" required />
+      </label>
 
-      <label>Your Name</label>
-      <input type="text" id="senderName" placeholder="John Smith" />
+      <label>Recipient name
+        <input id="recipientName" type="text" placeholder="Jordan Patel" required />
+      </label>
 
-      <label>Recipient Name</label>
-      <input type="text" id="recipientName" placeholder="Sara Patel" />
+      <label>Industry
+        <input id="industry" type="text" placeholder="Manufacturing automation" />
+      </label>
 
-      <label>Industry</label>
-      <input type="text" id="industry" placeholder="Roofing / Home Services" />
+      <label>Objective
+        <input id="goals" type="text" placeholder="Intro call about deploying robotics in packaging" />
+      </label>
 
-      <label>Message Type</label>
-      <select id="messageType">
-        <option value="cold-email">Cold Email</option>
-        <option value="warm-intro">Warm Introduction</option>
-        <option value="follow-up">Follow-Up Email</option>
-        <option value="re-engage">Re-Engagement Email</option>
-        <option value="sales-pitch">Sales Pitch</option>
-        <option value="discovery-call">Discovery Call Request</option>
-        <option value="proposal">Proposal Delivery</option>
-        <option value="contract-followup">Contract Follow-Up</option>
-        <option value="sms">SMS Outreach</option>
-        <option value="linkedin-connect">LinkedIn Connection Request</option>
-        <option value="linkedin-pitch">LinkedIn Pitch</option>
-        <option value="thank-you">Thank-You Message</option>
-      </select>
+      <label>Message type
+        <select id="messageType">
+          <option value="email">Email</option>
+          <option value="linkedin">LinkedIn DM</option>
+          <option value="followup">Follow-up</option>
+          <option value="inbound-reply">Inbound reply</option>
+        </select>
+      </label>
 
-      <label>Business Goals</label>
-      <textarea id="goals" placeholder="Book inspections, upsell plans, generate leads..."></textarea>
+      <label>Additional context
+        <textarea id="extra" placeholder="Relevant details, timing, references, constraints"></textarea>
+      </label>
 
-      <label>Additional Info</label>
-      <textarea id="extra" placeholder="Anything extra..."></textarea>
+      <div class="hero-buttons" style="margin-top:10px;">
+        <button class="btn-primary" id="generateBtn">Generate</button>
+        <button class="btn-secondary" id="clearBtn">Clear</button>
+      </div>
+    </form>
+  </main>
 
-      <button id="generateBtn" class="btn-primary" style="width:100%; margin-top:20px;">Generate Outreach</button>
-
-      <textarea id="output" class="hidden" style="margin-top:30px;"></textarea>
-
-    </div>
+  <section class="container card" style="margin-bottom:100px;">
+    <h3 style="margin-bottom:10px;">Draft</h3>
+    <textarea id="output" style="min-height:200px;" placeholder="Your draft will appear here…" readonly></textarea>
   </section>
 
   <footer>
-    © 2025 GridForge.ai — All Rights Reserved
+    <div class="container">© <span id="year"></span> GridForge.</div>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const $ = id => document.getElementById(id);
+
+    $('generateBtn').addEventListener('click', async () => {
+      const payload = {
+        businessName: $('businessName').value.trim(),
+        senderName: $('senderName').value.trim(),
+        recipientName: $('recipientName').value.trim(),
+        industry: $('industry').value.trim(),
+        goals: $('goals').value.trim(),
+        messageType: $('messageType').value,
+        extra: $('extra').value.trim()
+      };
+      if (!payload.businessName || !payload.senderName || !payload.recipientName) return;
+
+      $('output').value = 'Generating…';
+      try {
+        const res = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        $('output').value = data.message || 'No content returned.';
+      } catch {
+        $('output').value = 'Error generating content. Please try again.';
+      }
+    });
+
+    $('clearBtn').addEventListener('click', () => {
+      ['businessName','senderName','recipientName','industry','goals','extra'].forEach(id => $(id).value = '');
+      $('messageType').value = 'email';
+      $('output').value = '';
+    });
+  </script>
 </body>
 </html>
