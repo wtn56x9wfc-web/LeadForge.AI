@@ -4,250 +4,115 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>GridForge — Bulk Send</title>
+
   <style>
     :root { color-scheme: dark; }
-    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #0b0b0f; color: #eaeaf2; }
-    header { padding: 20px; border-bottom: 1px solid #191a22; display: flex; align-items: center; gap: 12px; }
-    header h1 { font-size: 18px; margin: 0; }
-    main { max-width: 960px; margin: 24px auto; padding: 0 16px 64px; }
-    .card { background: #11121a; border: 1px solid #1b1c26; border-radius: 14px; padding: 16px; margin-bottom: 16px; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    label { font-size: 12px; color: #a0a3b1; display: block; margin-bottom: 6px; }
-    input[type="text"], input[type="email"], textarea {
-      width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #26283a; background: #0f1017; color: #eaeaf2;
-      font-size: 14px; outline: none;
+    body { margin: 0; font-family: system-ui, sans-serif; background: #0b0b0f; color: #eee; }
+    header { padding: 20px; border-bottom: 1px solid #1b1c26; }
+    h1 { margin: 0 0 4px 0; font-size: 20px; }
+
+    main { max-width: 950px; margin: 24px auto; padding: 0 16px; }
+
+    .card {
+      background: #11121a;
+      border: 1px solid #1b1c26;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 24px;
     }
-    textarea { min-height: 120px; resize: vertical; }
-    input[type="file"] { font-size: 14px; }
+
+    label { display: block; margin-bottom: 6px; font-size: 13px; color: #aaa; }
+    input, textarea {
+      width: 100%; padding: 10px; border-radius: 8px;
+      border: 1px solid #26283a; background: #0f1017; color: #fff;
+      outline: none; font-size: 14px;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
     .btn {
-      appearance: none; border: 1px solid #2b2d40; background: #161825; color: #fff; padding: 10px 14px; border-radius: 10px; cursor: pointer;
-      font-weight: 600;
+      padding: 10px 14px; border: none; border-radius: 8px;
+      cursor: pointer; font-weight: 600; background: #3b5bfd;
+      color: #fff; margin-right: 12px;
     }
-    .btn.primary { background: #3b5bfd; border-color: #3b5bfd; }
-    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn.secondary { background: #222; }
+
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th, td { border-bottom: 1px solid #1b1c26; padding: 8px; text-align: left; }
-    .muted { color: #9aa0b4; }
-    .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; border: 1px solid #2a2d42; background: #14172a; font-size: 12px; }
-    .ok { color: #8cf2a5; }
-    .bad { color: #ff7a7a; }
-    .inline { display: inline-flex; gap: 8px; align-items: center; }
-    .small { font-size: 12px; }
-    .grid { display: grid; gap: 12px; }
-    .mb8 { margin-bottom: 8px; }
+    th, td { padding: 8px; border-bottom: 1px solid #242635; }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #1e2130;
+      border: 1px solid #2c3042;
+      font-size: 12px;
+      margin-left: 6px;
+    }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Bulk Send</h1><span class="pill">CSV → Emails</span>
-  </header>
-  <main>
-    <section class="card grid">
-      <div class="row">
-        <div>
-          <label>From (must be a verified sender in Resend)</label>
-          <input id="from" type="text" placeholder='e.g. "GridForge <no-reply@yourdomain.com>"'>
-        </div>
-        <div>
-          <label>API Endpoint</label>
-          <input id="endpoint" type="text" placeholder="/api/send-bulk" value="/api/send-bulk">
-        </div>
-      </div>
-      <div class="row">
-        <div>
-          <label>Subject Template (optional if CSV has a "subject" column)</label>
-          <input id="subjectTpl" type="text" placeholder="e.g. {{company}} x GridForge — quick intro">
-        </div>
-        <div>
-          <label>Attach Unsubscribe Footer?</label>
-          <input id="includeFooter" type="checkbox" checked> <span class="small muted">Adds a simple opt-out line.</span>
-        </div>
+<header>
+  <h1>Bulk Send</h1>
+</header>
+
+<main>
+
+  <!-- SETTINGS -->
+  <section class="card">
+    <div class="row">
+      <div>
+        <label>From (verified sender)</label>
+        <input id="from" placeholder='GridForge <outreach@yourdomain.com>'>
       </div>
       <div>
-        <label>Body Template (HTML ok) — optional if CSV has a "body" column</label>
-        <textarea id="bodyTpl" placeholder="Hi {{firstName}},&#10;&#10;I noticed {{company}}...&#10;&#10;— {{senderName}}"></textarea>
+        <label>Reply-To (user email — replies go here)</label>
+        <input id="replyTo" placeholder="user@example.com">
       </div>
-      <div class="row">
-        <div>
-          <label>Upload CSV (must include an "email" column)</label>
-          <input id="csvFile" type="file" accept=".csv">
-        </div>
-        <div style="align-self:end; justify-self:end;">
-          <button id="previewBtn" class="btn">Preview</button>
-          <button id="sendBtn" class="btn primary" disabled>Send</button>
-        </div>
+    </div>
+
+    <div class="row" style="margin-top:16px;">
+      <div>
+        <label>Subject Template</label>
+        <input id="subjectTpl" placeholder="{{company}} x GridForge — quick intro">
       </div>
-      <div class="small muted">
-        Tips: Columns in your CSV can be used like <code>{{columnName}}</code> inside the templates.
+      <div>
+        <label>API Endpoint</label>
+        <input id="endpoint" value="/api/send-bulk">
       </div>
-    </section>
+    </div>
 
-    <section id="preview" class="card" style="display:none">
-      <div class="inline mb8">
-        <strong>Preview</strong>
-        <span id="count" class="pill">0 rows</span>
-      </div>
-      <div id="tableWrap" style="max-height: 340px; overflow: auto;"></div>
-    </section>
+    <div style="margin-top:16px;">
+      <label>Body Template</label>
+      <textarea id="bodyTpl" placeholder="Hi {{firstName}},&#10;&#10;... message ..."></textarea>
+    </div>
 
-    <section id="results" class="card" style="display:none">
-      <div class="inline mb8">
-        <strong>Results</strong>
-        <span id="summary" class="pill">—</span>
-      </div>
-      <div id="resultsWrap" style="max-height: 340px; overflow: auto;"></div>
-    </section>
-  </main>
+    <div style="margin-top:16px;">
+      <label>Upload CSV</label>
+      <input id="csvFile" type="file" accept=".csv">
+    </div>
 
-  <script>
-    const csvFile = document.getElementById('csvFile');
-    const subjectTpl = document.getElementById('subjectTpl');
-    const bodyTpl = document.getElementById('bodyTpl');
-    const includeFooter = document.getElementById('includeFooter');
-    const fromInput = document.getElementById('from');
-    const endpointInput = document.getElementById('endpoint');
-    const previewBtn = document.getElementById('previewBtn');
-    const sendBtn = document.getElementById('sendBtn');
-    const previewSec = document.getElementById('preview');
-    const tableWrap = document.getElementById('tableWrap');
-    const countPill = document.getElementById('count');
-    const resultsSec = document.getElementById('results');
-    const resultsWrap = document.getElementById('resultsWrap');
-    const summaryPill = document.getElementById('summary');
+    <div style="margin-top:16px;">
+      <button id="previewBtn" class="btn secondary">Preview</button>
+      <button id="sendBtn" class="btn">Send</button>
+    </div>
+  </section>
 
-    let parsedRows = [];
-    let preparedEmails = [];
+  <!-- PREVIEW -->
+  <section id="previewSec" class="card" style="display:none;">
+    <h3>Preview <span id="count" class="pill">0</span></h3>
+    <div id="previewTable" style="max-height:300px; overflow:auto;"></div>
+  </section>
 
-    function parseCSV(text) {
-      // Lightweight parser; expects simple CSV (no complex quoting). Good enough for clean exports.
-      const lines = text.split(/\r?\n/).filter(Boolean);
-      if (lines.length === 0) return [];
-      const headers = lines[0].split(',').map(h => h.trim());
-      return lines.slice(1).map(line => {
-        const cells = splitCsvLine(line);
-        const obj = {};
-        headers.forEach((h, i) => obj[h] = (cells[i] ?? '').trim());
-        return obj;
-      });
-    }
+  <!-- RESULTS -->
+  <section id="resultsSec" class="card" style="display:none;">
+    <h3>Results <span id="summary" class="pill"></span></h3>
+    <div id="resultsTable" style="max-height:300px; overflow:auto;"></div>
+  </section>
 
-    function splitCsvLine(line) {
-      // Handles quoted cells with commas
-      const out = [];
-      let cur = '';
-      let inQuotes = false;
-      for (let i = 0; i < line.length; i++) {
-        const ch = line[i];
-        if (ch === '"' ) {
-          if (inQuotes && line[i+1] === '"') { cur += '"'; i++; }
-          else { inQuotes = !inQuotes; }
-        } else if (ch === ',' && !inQuotes) {
-          out.push(cur); cur = '';
-        } else {
-          cur += ch;
-        }
-      }
-      out.push(cur);
-      return out;
-    }
+</main>
 
-    function interpolate(tpl, row) {
-      if (!tpl) return '';
-      return tpl.replace(/\{\{(\w+)\}\}/g, (_, k) => row[k] ?? '');
-    }
-
-    function makeFooter() {
-      return `<br><hr style="border:none;border-top:1px solid #2a2d42;margin:16px 0">
-      <p style="font-size:12px;color:#9aa0b4">Don’t want emails from us? Reply “unsubscribe” and we’ll remove you.</p>`;
-    }
-
-    function renderTable(rows) {
-      const cols = Array.from(new Set(rows.flatMap(r => Object.keys(r))));
-      const thead = `<thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>`;
-      const tbody = `<tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${escapeHtml(r[c] ?? '')}</td>`).join('')}</tr>`).join('')}</tbody>`;
-      tableWrap.innerHTML = `<table>${thead}${tbody}</table>`;
-    }
-
-    function escapeHtml(s) {
-      return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
-    }
-
-    previewBtn.addEventListener('click', async () => {
-      const file = csvFile.files?.[0];
-      if (!file) { alert('Choose a CSV first.'); return; }
-      const text = await file.text();
-      parsedRows = parseCSV(text);
-      if (parsedRows.length === 0) { alert('CSV is empty.'); return; }
-
-      // Prepare preview of outbound emails
-      preparedEmails = parsedRows.map(row => {
-        const to = row.email || row.to || '';
-        const subject = row.subject || interpolate(subjectTpl.value, row) || 'Quick note';
-        const baseHtml = row.body || interpolate(bodyTpl.value, row) || '';
-        const html = includeFooter.checked ? (baseHtml + makeFooter()) : baseHtml;
-        const text = stripHtml(baseHtml);
-        return { to, subject, html, text };
-      }).filter(e => e.to);
-
-      countPill.textContent = `${preparedEmails.length} ready`;
-      previewSec.style.display = 'block';
-      renderTable(preparedEmails.map(e => ({ to: e.to, subject: e.subject, preview: e.text.slice(0, 120) })));
-      sendBtn.disabled = preparedEmails.length === 0;
-    });
-
-    sendBtn.addEventListener('click', async () => {
-      const from = fromInput.value.trim();
-      const endpoint = endpointInput.value.trim() || '/api/send-bulk';
-      if (!from) { alert('Enter a valid "From" value.'); return; }
-      if (preparedEmails.length === 0) { alert('Nothing to send. Click Preview first.'); return; }
-
-      sendBtn.disabled = true;
-      sendBtn.textContent = 'Sending...';
-
-      try {
-        const resp = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ from, emails: preparedEmails })
-        });
-        const data = await resp.json();
-        resultsSec.style.display = 'block';
-
-        if (!data.ok) {
-          summaryPill.textContent = `Error: ${data.error || 'unknown'}`;
-          summaryPill.classList.remove('ok');
-          summaryPill.classList.add('bad');
-          resultsWrap.innerHTML = `<pre>${escapeHtml(JSON.stringify(data, null, 2))}</pre>`;
-          return;
-        }
-
-        summaryPill.textContent = `Sent ${data.summary.sent}/${data.summary.total}, failed ${data.summary.failed}`;
-        resultsWrap.innerHTML = `<table>
-          <thead><tr><th>to</th><th>subject</th><th>status</th><th>id/error</th></tr></thead>
-          <tbody>
-            ${data.results.map(r => {
-              if (r.ok) {
-                return `<tr><td>${escapeHtml(r.to)}</td><td>${escapeHtml(r.subject || '')}</td><td class="ok">OK</td><td>${escapeHtml(r.id || '')}</td></tr>`;
-              }
-              return `<tr><td>${escapeHtml(r.to || '')}</td><td>${escapeHtml(r.subject || '')}</td><td class="bad">FAIL</td><td>${escapeHtml(r.error || '')}</td></tr>`;
-            }).join('')}
-          </tbody>
-        </table>`;
-      } catch (e) {
-        resultsSec.style.display = 'block';
-        summaryPill.textContent = 'Network error';
-        resultsWrap.innerHTML = `<pre>${escapeHtml(String(e))}</pre>`;
-      } finally {
-        sendBtn.disabled = false;
-        sendBtn.textContent = 'Send';
-      }
-    });
-
-    function stripHtml(html) {
-      const div = document.createElement('div');
-      div.innerHTML = html || '';
-      return (div.textContent || div.innerText || '').trim();
-    }
-  </script>
-</body>
-</html>
+<script>
+  const csvFil
