@@ -1,15 +1,14 @@
-// script.js
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("composer");
   const output = document.getElementById("output");
-
-  const generateBtn = document.getElementById("generateBtn");
   const clearBtn = document.getElementById("clearBtn");
   const downloadTemplateBtn = document.getElementById("downloadTemplateBtn");
   const generateBulkBtn = document.getElementById("generateBulkBtn");
   const bulkStatus = document.getElementById("bulkStatus");
 
-  generateBtn.onclick = () => {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
     const business = businessName.value.trim();
     const sender = senderName.value.trim();
     const recipient = recipientName.value.trim();
@@ -19,29 +18,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const type = messageType.value;
 
     let opener = "";
-    if (industry) {
-      opener = `Noticed you're working in ${industry}.`;
+    let body = "";
+    let close = "";
+
+    if (type === "email") {
+      opener = `Hi ${recipient},`;
+      body = extra || `I’m ${sender} from ${business}. ${industry ? `We work with teams in ${industry}.` : ""} ${goals}`;
+      close = "Open to a quick conversation?";
     }
 
-    let body = extra || goals || "Thought this might be relevant.";
+    if (type === "linkedin") {
+      opener = `${recipient} — quick note.`;
+      body = extra || `${sender} here from ${business}. ${goals}`;
+      close = "Worth a short chat?";
+    }
 
-    let close =
-      type === "linkedin"
-        ? "Worth a quick chat?"
-        : "Open to a short conversation?";
+    if (type === "followup") {
+      opener = `Hi ${recipient}, just circling back.`;
+      body = extra || `Wanted to follow up on my last note about ${goals}.`;
+      close = "Let me know either way.";
+    }
+
+    if (type === "inbound") {
+      opener = `Hey ${recipient},`;
+      body = extra || `Thanks for reaching out — happy to share more about ${business}.`;
+      close = "What’s the best next step?";
+    }
 
     output.style.display = "block";
-    output.textContent = 
-`${recipient},
-
-${opener}
+    output.textContent = `${opener}
 
 ${body}
 
 ${close}
 
 – ${sender}`;
-  };
+  });
 
   clearBtn.onclick = () => {
     form.reset();
@@ -50,7 +62,7 @@ ${close}
 
   downloadTemplateBtn.onclick = () => {
     const csv =
-"name,company,title,email,notes,industry,goals,messageType\n";
+      "name,company,title,email,notes,industry,goals,messageType\n";
     const blob = new Blob([csv], { type: "text/csv" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -59,6 +71,6 @@ ${close}
   };
 
   generateBulkBtn.onclick = () => {
-    bulkStatus.textContent = "Bulk logic ready. API next.";
+    bulkStatus.textContent = "Bulk wiring works. Backend/API next.";
   };
 });
