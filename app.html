@@ -34,13 +34,13 @@
           <option value="email">Email</option>
           <option value="linkedin">LinkedIn DM</option>
           <option value="followup">Follow-up</option>
-          <option value="inbound">Inbound Reply</option>
+          <option value="inbound-reply">Inbound Reply</option>
         </select>
 
         <textarea id="extra" placeholder="Additional context (optional)"></textarea>
 
         <div class="hero-buttons">
-          <button type="submit" class="btn-primary">Generate</button>
+          <button type="submit" class="btn-primary" id="generateBtn">Generate</button>
           <button type="button" class="btn-secondary" id="clearBtn">Clear</button>
         </div>
       </form>
@@ -50,12 +50,17 @@
 
     <div class="card" style="margin-top:24px;">
       <h2>Bulk</h2>
+
+      <input id="csvFile" type="file" accept=".csv" style="margin: 10px 0;" />
+
       <button id="downloadTemplateBtn" class="btn-secondary">
         Download CSV Template
       </button>
-      <button id="generateBulkBtn" class="btn-primary">
+
+      <button id="generateBulkBtn" class="btn-primary" disabled>
         Generate All
       </button>
+
       <div id="bulkStatus"></div>
     </div>
   </main>
