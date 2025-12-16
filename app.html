@@ -1,7 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="locked">
 <head>
-  <style>html{display:none !important;}</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GridForge App</title>
+  <meta name="description" content="Compose and refine professional outreach. Bulk generation from CSV included." />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    html.locked body {
+      visibility: hidden;
+    }
+  </style>
 
   <script>
     (function () {
@@ -10,34 +21,31 @@
 
       try {
         if (localStorage.getItem(FLAG) === "1") {
-          document.documentElement.style.display = "";
+          document.documentElement.classList.remove("locked");
           return;
         }
 
         const entered = prompt("Access key required:");
+
         if (!entered || entered.trim() !== ACCESS_KEY) {
+          alert("Access denied.");
           location.replace("https://google.com");
           return;
         }
 
         localStorage.setItem(FLAG, "1");
-        document.documentElement.style.display = "";
+        document.documentElement.classList.remove("locked");
       } catch (e) {
+        alert("Access error.");
         location.replace("https://google.com");
       }
     })();
   </script>
-
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GridForge App</title>
-  <meta name="description" content="Compose and refine professional outreach. Bulk generation from CSV included." />
-
-  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
+  <!-- NAV -->
   <nav class="navbar">
     <div class="container inner">
       <div class="nav-logo">Grid<strong><span>Forge</span></strong></div>
@@ -49,6 +57,7 @@
     </div>
   </nav>
 
+  <!-- HERO -->
   <header class="hero">
     <h1>Compose with clarity and control</h1>
     <p>
@@ -57,8 +66,10 @@
     </p>
   </header>
 
+  <!-- MAIN -->
   <main class="container section" style="padding-top:20px;">
 
+    <!-- SINGLE DRAFT -->
     <div class="card">
       <h2 style="margin-bottom:10px;">Single Draft</h2>
 
@@ -85,7 +96,7 @@
 
         <label>
           Objective
-          <input id="goals" type="text" placeholder="Intro call about deploying robotics in packaging" />
+          <input id="goals" type="text" placeholder="Intro call about robotics in packaging" />
         </label>
 
         <label>
@@ -100,7 +111,7 @@
 
         <label>
           Additional context
-          <textarea id="extra" placeholder="Relevant details, timing, references, constraints"></textarea>
+          <textarea id="extra" placeholder="Constraints, timing, relevance"></textarea>
         </label>
 
         <div class="hero-buttons" style="margin-top:6px;">
@@ -110,8 +121,9 @@
       </form>
     </div>
 
+    <!-- BULK -->
     <div class="card" style="margin-top:22px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
         <h2 style="margin:0;">Bulk Generator</h2>
         <div class="badge">
           Headers: name, company, title, email, notes, industry, goals, messageType
@@ -119,7 +131,7 @@
       </div>
 
       <p style="color:var(--text-muted);margin-top:8px;">
-        Upload a CSV with the headers above. One message is generated per row.
+        Upload a CSV. One row = one message.
       </p>
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin:14px 0;">
@@ -140,6 +152,19 @@
       </div>
 
       <div id="bulkStatus" style="margin-top:12px;color:var(--text-muted);"></div>
+    </div>
 
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;">
-        <button class="btn-secondary" id="downloadResultsBtn" type="button
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">© <span id="year"></span> GridForge.</div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
