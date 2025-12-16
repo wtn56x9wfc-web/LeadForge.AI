@@ -1,11 +1,9 @@
-<!-- app.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GridForge App</title>
-  <meta name="description" content="Compose and refine professional outreach." />
   <link rel="stylesheet" href="style.css" />
   <script src="auth.js"></script>
 </head>
@@ -21,39 +19,28 @@
     </div>
   </nav>
 
-  <header class="hero">
-    <h1>Compose with clarity and control</h1>
-    <p>Generate clean, professional outreach.</p>
-  </header>
-
   <main class="container section">
     <div class="card">
       <h2>Single Draft</h2>
 
-      <form id="composer" onsubmit="return false;">
-        <label>Business name <input id="businessName" required /></label>
-        <label>Sender name <input id="senderName" required /></label>
-        <label>Recipient name <input id="recipientName" required /></label>
-        <label>Industry <input id="industry" /></label>
-        <label>Objective <input id="goals" /></label>
+      <form id="composer">
+        <input id="businessName" placeholder="Business name" required />
+        <input id="senderName" placeholder="Your name" required />
+        <input id="recipientName" placeholder="Recipient name" required />
+        <input id="industry" placeholder="Industry (optional)" />
+        <input id="goals" placeholder="Primary objective" />
 
-        <label>
-          Message type
-          <select id="messageType">
-            <option value="email">Email</option>
-            <option value="linkedin">LinkedIn DM</option>
-            <option value="followup">Follow-up</option>
-            <option value="inbound-reply">Inbound reply</option>
-          </select>
-        </label>
+        <select id="messageType">
+          <option value="email">Email</option>
+          <option value="linkedin">LinkedIn DM</option>
+          <option value="followup">Follow-up</option>
+          <option value="inbound">Inbound Reply</option>
+        </select>
 
-        <label>
-          Additional context
-          <textarea id="extra"></textarea>
-        </label>
+        <textarea id="extra" placeholder="Additional context (optional)"></textarea>
 
         <div class="hero-buttons">
-          <button type="button" class="btn-primary" id="generateBtn">Generate</button>
+          <button type="submit" class="btn-primary">Generate</button>
           <button type="button" class="btn-secondary" id="clearBtn">Clear</button>
         </div>
       </form>
@@ -62,27 +49,17 @@
     </div>
 
     <div class="card" style="margin-top:24px;">
-      <h2>Bulk Generator</h2>
-      <input id="csvFile" type="file" accept=".csv" />
-      <div style="margin-top:12px;">
-        <button type="button" class="btn-secondary" id="downloadTemplateBtn">
-          Download CSV Template
-        </button>
-        <button type="button" class="btn-primary" id="generateBulkBtn" disabled>
-          Generate All
-        </button>
-      </div>
-      <div id="bulkStatus" style="margin-top:10px;"></div>
+      <h2>Bulk</h2>
+      <button id="downloadTemplateBtn" class="btn-secondary">
+        Download CSV Template
+      </button>
+      <button id="generateBulkBtn" class="btn-primary">
+        Generate All
+      </button>
+      <div id="bulkStatus"></div>
     </div>
   </main>
 
-  <footer>
-    <div class="container">© <span id="year"></span> GridForge.</div>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
   <script src="script.js"></script>
 </body>
 </html>
