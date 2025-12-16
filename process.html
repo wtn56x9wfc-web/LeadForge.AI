@@ -1,13 +1,36 @@
-<!-- process.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>html{display:none !important;}</style>
+
+  <script>
+    (function () {
+      const ACCESS_KEY = "forgealpha";
+      const FLAG = "gf_unlocked_v1";
+
+      if (localStorage.getItem(FLAG) === "1") {
+        document.documentElement.style.display = "";
+        return;
+      }
+
+      const entered = prompt("Access key required:");
+      if (!entered || entered.trim() !== ACCESS_KEY) {
+        location.replace("https://google.com");
+        return;
+      }
+
+      localStorage.setItem(FLAG, "1");
+      document.documentElement.style.display = "";
+    })();
+  </script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>How GridForge Works</title>
   <meta name="description" content="Understand the GridForge workflow for AI-assisted outreach." />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <nav class="navbar">
     <div class="container inner">
@@ -31,7 +54,6 @@
 
   <main class="container" style="margin:40px auto 100px;">
 
-    <!-- QUICK OVERVIEW -->
     <div class="features">
       <div class="feature-box">
         <h3>1) Provide inputs</h3>
@@ -47,7 +69,6 @@
       </div>
     </div>
 
-    <!-- WHAT YOU NEED -->
     <section class="cta" style="margin-top:28px;">
       <div class="container">
         <p style="max-width:760px;margin:0 auto 12px;color:var(--text-muted);">
@@ -70,7 +91,6 @@
       </div>
     </section>
 
-    <!-- SINGLE DRAFT: DETAILED FLOW -->
     <section style="margin-top:34px;">
       <h2 style="margin-bottom:10px;">Single Draft workflow</h2>
       <p style="color:var(--text-muted);max-width:820px;">
@@ -81,116 +101,30 @@
       <div class="features" style="margin-top:18px;">
         <div class="feature-box">
           <h3>Step A — Set the scene</h3>
-          <p>
-            Add business + recipient basics. The system uses this to avoid generic “AI soup”
-            and anchor the message in real context.
-          </p>
+          <p>Add business + recipient basics to anchor the message in real context.</p>
         </div>
-
         <div class="feature-box">
           <h3>Step B — Define intent</h3>
-          <p>
-            Choose message type (Email / LinkedIn DM / Follow-up / Inbound reply).
-            Each type has different length, tone, and pacing rules.
-          </p>
+          <p>Choose message type. Each type has different tone and pacing rules.</p>
         </div>
-
         <div class="feature-box">
           <h3>Step C — Add constraints</h3>
-          <p>
-            Constraints make drafts better. Examples: “keep under 90 words”, “no buzzwords”,
-            “ask for 15 minutes”, “mention their recent expansion”.
-          </p>
-        </div>
-      </div>
-
-      <div class="features" style="margin-top:18px;">
-        <div class="feature-box">
-          <h3>What the draft includes</h3>
-          <p>
-            A clean opening, one relevance hook, a direct ask, and a low-friction close.
-            No long paragraphs. No “synergy” garbage.
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>Why review matters</h3>
-          <p>
-            AI drafts are strong starting points, not holy scripture.
-            You should always sanity-check facts, names, and tone before sending.
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>How to iterate fast</h3>
-          <p>
-            Change one thing at a time: opening line, relevance hook, or the ask.
-            Keep what gets replies and reuse it.
-          </p>
+          <p>Constraints like length, tone, and ask sharpen the output.</p>
         </div>
       </div>
     </section>
 
-    <!-- BULK GENERATION: DETAILED FLOW -->
     <section style="margin-top:40px;">
       <h2 style="margin-bottom:10px;">Bulk Generator workflow</h2>
       <p style="color:var(--text-muted);max-width:820px;">
-        Use Bulk when you want one message per row in a CSV. You provide structured data,
-        GridForge produces structured drafts — and you export results for outreach.
+        One row per recipient. Structured inputs → structured drafts → exportable results.
       </p>
-
-      <div class="features" style="margin-top:18px;">
-        <div class="feature-box">
-          <h3>Step 1 — Download the template</h3>
-          <p>
-            Grab the Excel template so your headers match what GridForge expects.
-            If headers don’t match, you’ll get missing fields or ugly outputs.
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>Step 2 — Fill rows cleanly</h3>
-          <p>
-            Each row = one recipient. Keep notes short and factual.
-            Example notes: “hiring SDRs”, “opened Chicago office”, “uses HubSpot”.
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>Step 3 — Upload, preview, generate</h3>
-          <p>
-            Upload the CSV, preview the parsed rows, then generate all drafts.
-            After generation, download results as a CSV for sending.
-          </p>
-        </div>
-      </div>
-
-      <div class="features" style="margin-top:18px;">
-        <div class="feature-box">
-          <h3>Headers expected</h3>
-          <p>
-            name, company, title, email, notes, industry, goals, messageType
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>Best practices for Bulk</h3>
-          <p>
-            Don’t put essays in notes. Add one relevance hook per person.
-            The quality of your inputs controls the quality of your outputs.
-          </p>
-        </div>
-        <div class="feature-box">
-          <h3>Results you can export</h3>
-          <p>
-            You’ll typically export name/company/email + the generated message.
-            Then use your own outbound system to send responsibly.
-          </p>
-        </div>
-      </div>
     </section>
 
-    <!-- CTA -->
     <section class="cta" style="margin-top:40px;">
       <div class="container">
         <p style="max-width:760px;margin:0 auto 22px;color:var(--text-muted);">
-          GridForge is built around one principle: strong inputs → clean drafts → fast iteration.
-          If you want “magic,” go to a horoscope. If you want repeatable outcomes, this is it.
+          Strong inputs → clean drafts → fast iteration. That’s the whole game.
         </p>
         <a class="btn-secondary" href="app.html">Open GridForge</a>
       </div>
