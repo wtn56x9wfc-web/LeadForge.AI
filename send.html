@@ -1,227 +1,178 @@
+}
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>GridForge — Bulk Send</title>
-
-  <style>
-    :root { color-scheme: dark; }
-    body { margin: 0; font-family: system-ui, sans-serif; background: #0b0b0f; color: #eee; }
-    header { padding: 20px; border-bottom: 1px solid #1b1c26; }
-    h1 { margin: 0 0 4px 0; font-size: 20px; }
-
-    main { max-width: 950px; margin: 24px auto; padding: 0 16px; }
-
-    .card {
-      background: #11121a;
-      border: 1px solid #1b1c26;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 24px;
-    }
-
-    label { display: block; margin-bottom: 6px; font-size: 13px; color: #aaa; }
-    input, textarea {
-      width: 100%; padding: 10px; border-radius: 8px;
-      border: 1px solid #26283a; background: #0f1017; color: #fff;
-      outline: none; font-size: 14px;
-    }
-    textarea { min-height: 110px; resize: vertical; }
-
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .btn {
-      padding: 10px 14px; border: none; border-radius: 8px;
-      cursor: pointer; font-weight: 600; background: #3b5bfd;
-      color: #fff; margin-right: 12px;
-    }
-    .btn.secondary { background: #222; }
-
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    th, td { padding: 8px; border-bottom: 1px solid #242635; }
-
-    .pill {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 6px;
-      background: #1e2130;
-      border: 1px solid #2c3042;
-      font-size: 12px;
-      margin-left: 6px;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GridForge — FAQ</title>
+  <meta name="description" content="Straight answers about GridForge. No fluff." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-<header>
-  <h1>Bulk Send</h1>
-</header>
-
-<main>
-
-  <!-- SETTINGS -->
-  <section class="card">
-    <div class="row">
-      <div>
-        <label>From (verified sender)</label>
-        <input id="from" placeholder='GridForge <outreach@yourdomain.com>'>
-      </div>
-      <div>
-        <label>Reply-To (user email — replies go here)</label>
-        <input id="replyTo" placeholder="user@example.com">
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="container inner">
+      <div class="nav-logo">Grid<strong><span>Forge</span></strong></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="process.html">How it Works</a>
+        <a href="faq.html">FAQ</a>
+        <a href="app.html" class="nav-cta">Open GridForge</a>
       </div>
     </div>
+  </nav>
 
-    <div class="row" style="margin-top:16px;">
-      <div>
-        <label>Subject Template</label>
-        <input id="subjectTpl" placeholder="{{company}} x GridForge — quick intro">
-      </div>
-      <div>
-        <label>API Endpoint</label>
-        <input id="endpoint" value="/api/send-bulk">
-      </div>
-    </div>
+  <!-- HERO -->
 
-    <div style="margin-top:16px;">
-      <label>Body Template</label>
-      <textarea id="bodyTpl" placeholder="Hi {{firstName}},&#10;&#10;... message ..."></textarea>
-    </div>
+  <header class="hero" style="padding:90px 20px 36px;">
+    <h1>FAQ</h1>
+    <p>Straight answers. No filler. No coping.</p>
+  </header>
 
-    <div style="margin-top:16px;">
-      <label>Upload CSV</label>
-      <input id="csvFile" type="file" accept=".csv">
-    </div>
+  <!-- CONTENT -->
 
-    <div style="margin-top:16px;">
-      <button id="previewBtn" class="btn secondary">Preview</button>
-      <button id="sendBtn" class="btn">Send</button>
-    </div>
-  </section>
+  <main class="container section" style="padding-top:24px;">
+    <div class="grid grid-2">
 
-  <!-- PREVIEW -->
-  <section id="previewSec" class="card" style="display:none;">
-    <h3>Preview <span id="count" class="pill">0</span></h3>
-    <div id="previewTable" style="max-height:300px; overflow:auto;"></div>
-  </section>
+```
+  <div class="card">
+    <h3>What is GridForge?</h3>
+    <p style="color:var(--text-muted);">
+      GridForge is a workflow for generating professional outreach.
+      You provide structured inputs, it produces a clean draft,
+      and you decide what ships. Signal over noise.
+    </p>
+  </div>
 
-  <!-- RESULTS -->
-  <section id="resultsSec" class="card" style="display:none;">
-    <h3>Results <span id="summary" class="pill"></span></h3>
-    <div id="resultsTable" style="max-height:300px; overflow:auto;"></div>
-  </section>
+  <div class="card">
+    <h3>Who is this for?</h3>
+    <p style="color:var(--text-muted);">
+      Operators, founders, sales, and growth teams who care about clarity,
+      not volume. If you want copy that sounds human and intentional,
+      this is built for you.
+    </p>
+  </div>
 
-</main>
+  <div class="card">
+    <h3>What makes GridForge different?</h3>
+    <p style="color:var(--text-muted);">
+      Strong defaults, tight structure, and constraints that actually help.
+      No “AI vibes.” No corporate word salad.
+    </p>
+  </div>
 
-<script>
-  const csvFile = document.getElementById("csvFile");
-  const fromInput = document.getElementById("from");
-  const replyToInput = document.getElementById("replyTo");
-  const subjectTpl = document.getElementById("subjectTpl");
-  const bodyTpl = document.getElementById("bodyTpl");
-  const endpointInput = document.getElementById("endpoint");
-  const previewSec = document.getElementById("previewSec");
-  const previewTable = document.getElementById("previewTable");
-  const resultsSec = document.getElementById("resultsSec");
-  const resultsTable = document.getElementById("resultsTable");
-  const countPill = document.getElementById("count");
-  const summaryPill = document.getElementById("summary");
+  <div class="card">
+    <h3>Is it only for email?</h3>
+    <p style="color:var(--text-muted);">
+      No. Email, LinkedIn DMs, follow-ups, and inbound replies are supported.
+      Each message type has different rules for length, tone, and pacing.
+    </p>
+  </div>
 
-  let parsedRows = [];
-  let preparedEmails = [];
+  <div class="card">
+    <h3>How do I get better outputs?</h3>
+    <p style="color:var(--text-muted);">
+      Better inputs. Add one real relevance hook.
+      Keep the objective singular.
+      Constraints like “under 90 words” beat “make it better.”
+    </p>
+  </div>
 
-  function parseCSV(text) {
-    const lines = text.split(/\r?\n/).filter(l => l.trim() !== "");
-    const headers = lines[0].split(",");
-    return lines.slice(1).map(line => {
-      const cells = line.split(",");
-      const obj = {};
-      headers.forEach((h, i) => obj[h.trim()] = cells[i]?.trim() || "");
-      return obj;
-    });
-  }
+  <div class="card">
+    <h3>What should I put in “Additional context”?</h3>
+    <p style="color:var(--text-muted);">
+      Facts that increase relevance: timing, constraints,
+      references, or what the recipient actually cares about.
+      One or two details &gt; a paragraph of fluff.
+    </p>
+  </div>
 
-  function interpolate(tpl, row) {
-    return tpl.replace(/\{\{(\w+)\}\}/g, (_, key) => row[key] || "");
-  }
+  <div class="card">
+    <h3>What is “message type”?</h3>
+    <p style="color:var(--text-muted);">
+      It tells GridForge how the message should behave.
+      Email is more formal, LinkedIn is shorter,
+      follow-ups assume context, inbound replies are direct.
+    </p>
+  </div>
 
-  function stripHtml(html) {
-    const div = document.createElement("div");
-    div.innerHTML = html;
-    return div.textContent || "";
-  }
+  <div class="card">
+    <h3>How does the Bulk Generator work?</h3>
+    <p style="color:var(--text-muted);">
+      You upload a CSV. Each row equals one recipient.
+      GridForge generates one message per row.
+      You export the results and send them using your own system.
+    </p>
+  </div>
 
-  document.getElementById("previewBtn").onclick = async () => {
-    const file = csvFile.files[0];
-    if (!file) return alert("Upload a CSV first.");
+  <div class="card">
+    <h3>What headers does Bulk require?</h3>
+    <p style="color:var(--text-muted);">
+      <strong>name, company, title, email, notes, industry, goals, messageType</strong>
+    </p>
+  </div>
 
-    parsedRows = parseCSV(await file.text());
-    preparedEmails = parsedRows.map(r => {
-      const to = r.email || r.to;
-      const subject = r.subject || interpolate(subjectTpl.value, r);
-      const html = r.body || interpolate(bodyTpl.value, r);
-      return {
-        to,
-        subject,
-        html,
-        text: stripHtml(html)
-      };
-    });
+  <div class="card">
+    <h3>Why do bulk messages look generic?</h3>
+    <p style="color:var(--text-muted);">
+      Because the rows are generic.
+      Bulk works when <em>notes</em> includes a real hook:
+      tool stack, hiring signal, expansion, KPI pressure.
+    </p>
+  </div>
 
-    previewSec.style.display = "block";
-    countPill.textContent = preparedEmails.length;
+  <div class="card">
+    <h3>Does GridForge send emails for me?</h3>
+    <p style="color:var(--text-muted);">
+      GridForge generates drafts.
+      Sending is your responsibility.
+      If you automate delivery, do it properly:
+      verified domains, deliverability basics, compliance.
+    </p>
+  </div>
 
-    previewTable.innerHTML = `
-      <table>
-        <thead><tr><th>Email</th><th>Subject</th><th>Preview</th></tr></thead>
-        <tbody>
-        ${preparedEmails.map(e => `
-          <tr>
-            <td>${e.to}</td>
-            <td>${e.subject}</td>
-            <td>${e.text.slice(0, 80)}</td>
-          </tr>`).join("")}
-        </tbody>
-      </table>
-    `;
-  };
+  <div class="card">
+    <h3>Do you store my data?</h3>
+    <p style="color:var(--text-muted);">
+      Treat GridForge like any outbound tool.
+      Don’t paste secrets or regulated data.
+      If you need strict compliance, keep inputs policy-safe.
+    </p>
+  </div>
 
-  document.getElementById("sendBtn").onclick = async () => {
-    if (preparedEmails.length === 0) return alert("Preview first.");
+  <div class="card">
+    <h3>Does GridForge guarantee replies?</h3>
+    <p style="color:var(--text-muted);">
+      No. Nothing does.
+      GridForge improves clarity and relevance.
+      Targeting, offer, and timing still matter.
+    </p>
+  </div>
 
-    const payload = {
-      from: fromInput.value.trim(),
-      replyTo: replyToInput.value.trim(),
-      emails: preparedEmails
-    };
+  <div class="card">
+    <h3>Is AI-written outreach detectable?</h3>
+    <p style="color:var(--text-muted);">
+      Not when it’s short, specific, and grounded.
+      The giveaway is generic praise, long intros,
+      and corporate nonsense. Keep it tight.
+    </p>
+  </div>
 
-    const resp = await fetch(endpointInput.value.trim(), {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(payload)
-    });
+</div>
+```
 
-    const data = await resp.json();
-    resultsSec.style.display = "block";
+  </main>
 
-    summaryPill.textContent = `${data.summary.sent}/${data.summary.total} sent`;
+  <!-- FOOTER -->
 
-    resultsTable.innerHTML = `
-      <table>
-        <thead><tr><th>Email</th><th>Status</th><th>ID/Error</th></tr></thead>
-        <tbody>
-          ${data.results.map(r => `
-            <tr>
-              <td>${r.to}</td>
-              <td>${r.ok ? "OK" : "FAIL"}</td>
-              <td>${r.ok ? r.id : r.error}</td>
-            </tr>`).join("")}
-        </tbody>
-      </table>
-    `;
-  };
-</script>
-
+  <footer>
+    <div class="container">© <span id="year"></span> GridForge.</div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
