@@ -1,103 +1,43 @@
+<!-- app.html -->
 <!DOCTYPE html>
-<html lang="en" class="locked">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GridForge App</title>
   <meta name="description" content="Compose and refine professional outreach. Bulk generation from CSV included." />
-
   <link rel="stylesheet" href="style.css" />
-
-  <style>
-    html.locked body {
-      visibility: hidden;
-    }
-  </style>
-
-  <script>
-    (function () {
-      const ACCESS_KEY = "forgealpha";
-      const FLAG = "gf_unlocked_v1";
-
-      try {
-        if (localStorage.getItem(FLAG) === "1") {
-          document.documentElement.classList.remove("locked");
-          return;
-        }
-
-        const entered = prompt("Access key required:");
-
-        if (!entered || entered.trim() !== ACCESS_KEY) {
-          alert("Access denied.");
-          location.replace("https://google.com");
-          return;
-        }
-
-        localStorage.setItem(FLAG, "1");
-        document.documentElement.classList.remove("locked");
-      } catch (e) {
-        alert("Access error.");
-        location.replace("https://google.com");
-      }
-    })();
-  </script>
+  <script src="auth.js"></script>
 </head>
 
 <body>
 
-  <!-- NAV -->
   <nav class="navbar">
     <div class="container inner">
       <div class="nav-logo">Grid<strong><span>Forge</span></strong></div>
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="process.html">How it Works</a>
         <a href="faq.html">FAQ</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
   <header class="hero">
     <h1>Compose with clarity and control</h1>
-    <p>
-      Provide the essentials—business, recipient, objective—and generate a concise, professional draft.
-      Or upload a CSV to generate messages at scale.
-    </p>
+    <p>Generate single drafts or bulk outreach without bullshit.</p>
   </header>
 
-  <!-- MAIN -->
-  <main class="container section" style="padding-top:20px;">
+  <main class="container section">
 
-    <!-- SINGLE DRAFT -->
     <div class="card">
-      <h2 style="margin-bottom:10px;">Single Draft</h2>
+      <h2>Single Draft</h2>
 
-      <form id="composer" onsubmit="return false;">
-        <label>
-          Business name
-          <input id="businessName" type="text" placeholder="Acme Robotics" required />
-        </label>
-
-        <label>
-          Sender name
-          <input id="senderName" type="text" placeholder="Alex Chen" required />
-        </label>
-
-        <label>
-          Recipient name
-          <input id="recipientName" type="text" placeholder="Jordan Patel" required />
-        </label>
-
-        <label>
-          Industry
-          <input id="industry" type="text" placeholder="Manufacturing automation" />
-        </label>
-
-        <label>
-          Objective
-          <input id="goals" type="text" placeholder="Intro call about robotics in packaging" />
-        </label>
+      <form id="composer">
+        <label>Business name<input id="businessName" required /></label>
+        <label>Sender name<input id="senderName" required /></label>
+        <label>Recipient name<input id="recipientName" required /></label>
+        <label>Industry<input id="industry" /></label>
+        <label>Objective<input id="goals" /></label>
 
         <label>
           Message type
@@ -109,62 +49,36 @@
           </select>
         </label>
 
-        <label>
-          Additional context
-          <textarea id="extra" placeholder="Constraints, timing, relevance"></textarea>
-        </label>
+        <label>Additional context<textarea id="extra"></textarea></label>
 
-        <div class="hero-buttons" style="margin-top:6px;">
-          <button class="btn-primary" id="generateBtn">Generate</button>
+        <div class="hero-buttons">
+          <button class="btn-primary" id="generateBtn" type="submit">Generate</button>
           <button class="btn-secondary" id="clearBtn" type="button">Clear</button>
         </div>
       </form>
+
+      <pre id="output" style="margin-top:12px;display:none;"></pre>
     </div>
 
-    <!-- BULK -->
-    <div class="card" style="margin-top:22px;">
-      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-        <h2 style="margin:0;">Bulk Generator</h2>
-        <div class="badge">
-          Headers: name, company, title, email, notes, industry, goals, messageType
-        </div>
+    <div class="card" style="margin-top:24px;">
+      <h2>Bulk Generator</h2>
+
+      <input id="csvFile" type="file" accept=".csv" />
+      <div style="margin-top:10px;">
+        <button class="btn-secondary" id="downloadTemplateBtn" type="button">Download CSV Template</button>
+        <button class="btn-primary" id="generateBulkBtn" type="button">Generate All</button>
       </div>
 
-      <p style="color:var(--text-muted);margin-top:8px;">
-        Upload a CSV. One row = one message.
-      </p>
-
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin:14px 0;">
-        <input id="csvFile" type="file" accept=".csv" />
-        <button class="btn-secondary" id="downloadTemplateBtn" type="button">
-          Download CSV Template
-        </button>
-        <button class="btn-primary" id="generateBulkBtn" type="button" disabled>
-          Generate All
-        </button>
-      </div>
-
-      <div id="csvPreviewWrap" class="table-wrap" style="display:none;margin-top:10px;">
-        <table id="csvPreview">
-          <thead></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <div id="bulkStatus" style="margin-top:12px;color:var(--text-muted);"></div>
+      <div id="bulkStatus" style="margin-top:12px;"></div>
     </div>
 
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">© <span id="year"></span> GridForge.</div>
   </footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-
   <script src="script.js"></script>
+  <script>document.getElementById("year").textContent=new Date().getFullYear();</script>
 </body>
 </html>
