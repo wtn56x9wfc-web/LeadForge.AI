@@ -1,37 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>html{display:none !important;}</style>
-
-  <script>
-    (function () {
-      const ACCESS_KEY = "forgealpha";
-      const FLAG = "gf_unlocked_v1";
-
-      try {
-        if (localStorage.getItem(FLAG) === "1") {
-          document.documentElement.style.display = "";
-          return;
-        }
-
-        const entered = prompt("Access key required:");
-        if (!entered || entered.trim() !== ACCESS_KEY) {
-          location.replace("https://google.com");
-          return;
-        }
-
-        localStorage.setItem(FLAG, "1");
-        document.documentElement.style.display = "";
-      } catch (e) {
-        location.replace("https://google.com");
-      }
-    })();
-  </script>
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GridForge — AI-Assisted Outreach</title>
-  <meta name="description" content="Concise, professional outreach powered by a clean, enterprise-grade UX." />
+  <meta name="description" content="Concise, professional outreach with a clean workflow." />
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -47,6 +20,7 @@
         <a href="index.html">Home</a>
         <a href="process.html">How it Works</a>
         <a href="faq.html">FAQ</a>
+        <a href="app.html" class="nav-cta">Open GridForge</a>
       </div>
     </div>
   </nav>
@@ -55,11 +29,9 @@
   <header class="hero">
     <h1>AI-assisted outreach that respects attention</h1>
     <p>
-      Reach the right people with messages that read like a pro wrote them—confident, concise, and relevant.
-      The language and UX follow the same modern standards used by leading AI product teams:
-      clear structure, strong defaults, and measurable outcomes.
+      Reach the right people with messages that sound human—clear, concise, and relevant.
+      Built for operators who care about signal, not spam.
     </p>
-
     <div class="hero-buttons">
       <a class="btn-primary" href="app.html">Open GridForge</a>
       <a class="btn-secondary" href="process.html">See how it works</a>
@@ -71,8 +43,8 @@
     <div class="container">
       <h2>What you get</h2>
       <p style="max-width:760px;margin-top:8px;color:var(--text-muted);">
-        Precision messaging and a streamlined workflow.
-        Signal over noise, built for operators who care about outcomes.
+        A clean workflow for writing outreach that people actually read.
+        Strong defaults. No fluff.
       </p>
     </div>
   </section>
@@ -80,22 +52,18 @@
   <!-- FEATURES -->
   <section class="container">
     <div class="features">
-
       <div class="feature-box">
-        <h3>Concise, on-brand copy</h3>
-        <p>Professional tone without the fluff. Context-aware and ready to send.</p>
+        <h3>Clear, professional copy</h3>
+        <p>Short, specific drafts that don’t sound like AI sludge.</p>
       </div>
-
       <div class="feature-box">
-        <h3>Simple pipeline</h3>
-        <p>Provide inputs, generate a draft, review, ship. Clean surfaces and fast iteration.</p>
+        <h3>Simple workflow</h3>
+        <p>Input → draft → review → send. No bullshit.</p>
       </div>
-
       <div class="feature-box">
-        <h3>Built to scale</h3>
-        <p>Frontend clarity that pairs with modern data and GPU stacks when you need to grow.</p>
+        <h3>Built for scale</h3>
+        <p>Works for single messages or structured bulk outreach.</p>
       </div>
-
     </div>
   </section>
 
