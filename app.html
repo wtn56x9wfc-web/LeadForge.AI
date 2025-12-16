@@ -23,7 +23,7 @@
     <div class="card">
       <h2>Single Draft</h2>
 
-      <form id="composer">
+      <form id="composer" autocomplete="off">
         <input id="businessName" placeholder="Business name" required />
         <input id="senderName" placeholder="Your name" required />
         <input id="recipientName" placeholder="Recipient name" required />
@@ -40,12 +40,18 @@
         <textarea id="extra" placeholder="Additional context (optional)"></textarea>
 
         <div class="hero-buttons">
-          <button type="submit" class="btn-primary" id="generateBtn">Generate</button>
+          <!-- IMPORTANT: type=button so it never submits/resets the form -->
+          <button type="button" class="btn-primary" id="generateBtn">Generate</button>
           <button type="button" class="btn-secondary" id="clearBtn">Clear</button>
         </div>
       </form>
 
-      <pre id="output" style="display:none;margin-top:16px;"></pre>
+      <!-- Editable output so you can tweak it -->
+      <textarea
+        id="output"
+        style="display:none;margin-top:16px;width:100%;min-height:220px;resize:vertical;font:inherit;"
+        placeholder="Your generated message will appear here..."
+      ></textarea>
     </div>
 
     <div class="card" style="margin-top:24px;">
@@ -53,11 +59,11 @@
 
       <input id="csvFile" type="file" accept=".csv" style="margin: 10px 0;" />
 
-      <button id="downloadTemplateBtn" class="btn-secondary">
+      <button id="downloadTemplateBtn" class="btn-secondary" type="button">
         Download CSV Template
       </button>
 
-      <button id="generateBulkBtn" class="btn-primary" disabled>
+      <button id="generateBulkBtn" class="btn-primary" type="button" disabled>
         Generate All
       </button>
 
